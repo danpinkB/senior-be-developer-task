@@ -1,4 +1,5 @@
 import {  Message } from "./Database";
+import { sleep } from "./Util";
 
 export class Queue {
     private messages: Message[]
@@ -24,7 +25,7 @@ export class Queue {
                 this.processingMessages.set(message.id, message)
             }
             else {
-                await new Promise((resolve)=>setTimeout(resolve, 1)).then(()=>{
+                await sleep(1).then(()=>{
                     helper()
                 })
             }
