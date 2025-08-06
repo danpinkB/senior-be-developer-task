@@ -56,3 +56,5 @@ DB state:
 Please assist our dev team to implement a valid version of `Queue.ts`! 
 
 *note*: Any implementation that would effectively not allow any parallel work between the workers would be rejected.
+
+# explanation
