@@ -59,6 +59,7 @@ Please assist our dev team to implement a valid version of `Queue.ts`!
 
 ## explanation
 so the main thing is - all que methods are synchronous and I decided to use macrotask queue to not lock event loop for other workers.
+Also there is two maps, one is using like a lock for specific key to be sure that operation for specific item will be executed after confirmation of previous one, also the map for processing measages to be able to unlock item.
 
 ## improvement suggestions:
 - make all methods of que async to implement that logic more clearly 
