@@ -1,7 +1,7 @@
 import { logger } from "../log/logger";
 import { Message } from "../db/common";
 import { Queue } from "../que/queue";
-import {queueErrorCounter, queueProcessedCounter} from '../service/metrics'
+import { queueErrorCounter, queueProcessedCounter } from "../service/metrics";
 
 export class Worker {
     private queue: Queue;

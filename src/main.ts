@@ -8,7 +8,12 @@ import { Worker } from "./worker/worker";
 import { logger } from "./log/logger";
 import express from "express";
 import { config } from "./config/config";
-import { queueDepthGauge, queueInFlightGauge, queuePendingGauge, register } from "./service/metrics";
+import {
+    queueDepthGauge,
+    queueInFlightGauge,
+    queuePendingGauge,
+    register,
+} from "./service/metrics";
 
 const ITEMS_NUMBER = getRandomIntInRange(3, 6);
 const WORKERS_NUMBER = getRandomIntInRange(3, 6);
@@ -33,19 +38,19 @@ function updateMetrics() {
 
 setInterval(updateMetrics, 5000);
 
-app.get('/healthz', (_, res) => {
-    res.status(200).send('OK');
+app.get("/healthz", (_, res) => {
+    res.status(200).send("OK");
 });
 
-app.get('/metrics', async (_, res) => {
-    res.set('Content-Type', register.contentType);
+app.get("/metrics", async (_, res) => {
+    res.set("Content-Type", register.contentType);
     res.end(await register.metrics());
 });
 
 const main = async () => {
     logger.debug(`Number of items:${ITEMS_NUMBER}`);
     logger.debug(`Number of workers:${WORKERS_NUMBER}`);
-    
+
     applyToAll(queue, Operations.SET, 50);
     for (let i = 0; i < 10; i++) {
         applyToAll(queue, Operations.ADD, i);
@@ -58,8 +63,8 @@ const main = async () => {
     logger.debug(`Queue size: ${await queue.size()}`);
     logger.debug(`DB state:\n ${JSON.stringify(await db.state(), null, 4)}`);
 };
-process.on('SIGTERM', shutDown);
-process.on('SIGINT', shutDown);
+process.on("SIGTERM", shutDown);
+process.on("SIGINT", shutDown);
 
 const server = app.listen(config.PORT, () => {
     logger.debug(`app listening on port ${config.PORT}`);
@@ -70,7 +75,6 @@ main();
 function shutDown() {
     logger.debug("received kill signal: shutting down");
     server.close(() => {
-        console.log('Closed out remaining connections');
         queue.shutdown();
         process.exit(0);
     });
