@@ -1,0 +1,25 @@
+{
+    "compilerOptions": {
+        "module": "nodenext",
+        "declaration": false,
+        "removeComments": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "allowSyntheticDefaultImports": true,
+        "target": "ESNext",
+        "sourceMap": false,
+        "outDir": "./dist",
+        "baseUrl": "./",
+        "moduleResolution": "nodenext",
+        "isolatedModules": true,
+        "incremental": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "strictNullChecks": false,
+        "noImplicitAny": false,
+        "strictBindCallApply": false,
+        "forceConsistentCasingInFileNames": false,
+        "noFallthroughCasesInSwitch": false
+    },
+    "exclude": ["eslint.config.mts"]
+}

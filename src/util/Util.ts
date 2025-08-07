@@ -1,5 +1,5 @@
 export function sleep(ms: number) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+    return new Promise((resolve) => setTimeout(resolve, ms));
 }
 export function getRandomInt(max: number): number {
     return Math.floor(Math.random() * max);
@@ -10,5 +10,5 @@ export function getRandomIntInRange(from: number, to: number): number {
 }
 
 export function range(n: number): number[] {
-    return [...Array(n).keys()]
+    return [...Array(n).keys()];
 }

@@ -1,0 +1,28 @@
+services:
+    item_data_storage:
+        container_name: item_data_storage
+        image: postgres
+        volumes:
+            - item_data_storage:/var/lib/postgresql/data
+        environment:
+            POSTGRES_USER: ${POSTGRES_USER}
+            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+            POSTGRES_DB: ${POSTGRES_DB_NAME}
+        ports:
+            - "5432:5432"
+    queue_app:
+        container_name: queue_app
+        build:
+            context: .
+        environment:
+            DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@item_data_storage:5432/${POSTGRES_DB_NAME}
+            LOG_LVL: ${LOG_LVL}
+            PORT: ${PORT}
+        command: ["node", "./dist/main"]
+        # command: ["sh", "-c", "while true; do echo 'Running...'; sleep 5; done"]
+        # depend_on:
+        #   - item_data_storage
+        ports:
+            - "${PORT}:${PORT}"
+volumes:
+    item_data_storage:
