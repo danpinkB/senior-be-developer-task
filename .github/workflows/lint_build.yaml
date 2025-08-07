@@ -3,7 +3,7 @@ name: lint-build-action
 on:
     pull_request:
         branches:
-            - main
+            - master
             - develop
 jobs:
     lint-build:

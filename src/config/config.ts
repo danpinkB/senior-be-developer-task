@@ -7,10 +7,10 @@ const configSchema = z.object({
     NODE_ENV: z
         .enum(["production", "staging", "developement", "test"])
         .default("developement"),
-    PORT: z.number().default(3000),
+    PORT: z.int().default(3000),
 });
 export const config = configSchema.parse({
     LOG_LVL: process.env.LOG_LVL,
     NODE_ENV: process.env.NODE_ENV,
-    PORT: parseInt(process.env.PORT),
+    PORT: parseInt(process.env.PORT) || undefined,
 });

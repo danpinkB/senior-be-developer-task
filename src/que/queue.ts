@@ -66,14 +66,14 @@ export class Queue {
     }
 
     inFlightSize(): number {
-        return this.processingMessages.size
+        return this.processingMessages.size;
     }
 
     pendingSize(): number {
-        let c =0;
-        this.waitQueues.forEach((val)=>{
-            c+=val.length
-        })
+        let c = 0;
+        this.waitQueues.forEach((val) => {
+            c += val.length;
+        });
         return this.messages.length + c;
     }
 
